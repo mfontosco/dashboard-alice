@@ -1,10 +1,10 @@
 import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
-import staffService from "./staffService";
+import voucherServices from "./voucherServices";
 
  console.log("-----------------")
 
 const initialState ={
-    staff:[],
+    voucher:[],
     isError:false,
     isSuccess:false,
     isLoading:false,
@@ -13,10 +13,10 @@ const initialState ={
 console.log("----------------->>>>>>.>>>>>>>>")
 
 
-export const createStaffAction = createAsyncThunk("api/Staff_list",async(staffData,thunkAPI)=>{
+export const addNewProductDiscountAction = createAsyncThunk("api/Staff_list",async(staffData,thunkAPI)=>{
     console.log("--------********--------->>>>>>.>>>>>>>>")
     try {
-        return await staffService.createStaff(staffData)
+        return await voucherServices.addNewProductDiscount(staffData)
     } catch (error) {
         const message =
         (error.response &&
@@ -30,7 +30,7 @@ export const createStaffAction = createAsyncThunk("api/Staff_list",async(staffDa
     }
 })
 
-export const createStaffSlice = createSlice({
+export const addNewProductDiscountSlice = createSlice({
     name:"staff",
     initialState,
     reducers:{
@@ -42,15 +42,15 @@ export const createStaffSlice = createSlice({
         }
     },
     extraReducers:(builder)=>{
-builder.addCase(createStaffAction.pending,(state)=>{
+builder.addCase(addNewProductDiscountAction.pending,(state)=>{
     state.isLoading =true
 })
-builder.addCase(createStaffAction.fulfilled,(state,action)=>{
+builder.addCase(addNewProductDiscountAction.fulfilled,(state,action)=>{
     state.isLoading=false,
     state.isSuccess=true,
-    state.staff=action.payload
+    state.voucher=action.payload
 })
-builder.addCase(createStaffAction.rejected,(state,action)=>{
+builder.addCase(addNewProductDiscountAction.rejected,(state,action)=>{
     state.isLoading=false, 
     state.isSuccess=false,
     state.isError=true,
@@ -60,6 +60,6 @@ builder.addCase(createStaffAction.rejected,(state,action)=>{
     }
 })
 
-export const {reset}=createStaffSlice.actions;
+export const {reset}=addNewProductDiscountSlice.actions;
 
-export default createStaffSlice.reducer
+export default addNewProductDiscountSlice.reducer

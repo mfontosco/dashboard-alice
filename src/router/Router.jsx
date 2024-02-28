@@ -38,7 +38,7 @@ const Router = () => {
         <Route path="/dashboard/add-staff" element={<Sidebar><Staff/></Sidebar>}/>
         <Route path="/dashboard/staff-list" element={<Sidebar><StaffList/></Sidebar>}/>
         <Route path="/dashboard/product-list" element={<Sidebar><ProductList/></Sidebar>}/>
-        <Route path="/dashboard/staff/:id" element={<Sidebar><SpecificStaff/></Sidebar>}/>
+        <Route path="/dashboard/staff/" element={<Sidebar><SpecificStaff/></Sidebar>}/>
         <Route path="/dashboard/add-brand" element={<Sidebar><AddBrandScreen/></Sidebar>}/>
         <Route path="/dashboard/brand-list" element={<Sidebar><BrandsListScreen/></Sidebar>}/>
         <Route path="/dashboard/add-category" element={<Sidebar><AddCategoryScreen/></Sidebar>}/>

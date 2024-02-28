@@ -1,8 +1,18 @@
-import React from 'react'
+
 import MyApplication from '../../components/MyApplication'
+import { useState } from 'react'
 
 const AccountEditPage = () => {
+const [name,setName] = useState()
+const handleChange =(e)=>{
 
+  const {name,value} = e.target
+  setName((prevState)=>({...prevState,[name]:value}))
+}
+const handleSubmit =(e)=>{
+  e.preventDefault()
+alert("it's working")
+}
   return (
     <div className='md:w-[80%] w-full px-4 flex flex-col items-center rounded md'>
 
@@ -12,10 +22,12 @@ const AccountEditPage = () => {
         </div>
         <section className='w-full flex flex-col justify-center items-center'>
         <h2 className='mb-2'>Display Name</h2>
-        <div>
-      <input className="opacity-50 bg-gray-300 text-black "  />
+       <form onSubmit={handleSubmit}>
+       <div>
+      <input className="opacity-50 bg-gray-300 text-black " onChange={handleChange} value={name} type='text' />
        </div>
        <button className='mb-10 text-xs mt-2 bg-black text-white rounded-sm py-1 px-2'>Save Display Name</button>
+       </form>
        <hr/>
        <div className='border py-2 w-full flex justify-center items-center '>
             <p className='text-sm flex justify-center items-center'><span className='text-lg'>Username:</span>ayeniisaac1on1@gmail.com</p>

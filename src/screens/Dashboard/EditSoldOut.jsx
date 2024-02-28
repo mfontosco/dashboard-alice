@@ -1,4 +1,3 @@
-import React from 'react';
 import EditProduct from '../../components/EditProduct';
 
 const EditSoldOut = () => {
@@ -8,7 +7,6 @@ const EditSoldOut = () => {
             <p className='text-center mb-4'>Last Saved: 31/01/24 00:12</p>
             <hr />
             <div className='h-auto'>
-
                 <EditProduct />
             </div>
         </div>

@@ -1,5 +1,16 @@
 import { combineReducers } from "redux";
-import { getStaffsReducer,getCustomerReducer,createStaffReducer } from "./CombineImports";
+import { getStaffsReducer,
+    getCustomerReducer,
+    createStaffReducer,
+    updateAccountReducer, 
+    getActivitiesReducer,
+    addNewProductDiscountSliceReducer,
+    addNewGiftVoucherSliceReducer,
+    addNewSaleDiscountSliceReducer,
+    addNewExchangeVoucherReducer,
+    getBrandReducer,
+    createBrandReducer
+} from "./CombineImports";
 
 
 
@@ -7,7 +18,15 @@ import { getStaffsReducer,getCustomerReducer,createStaffReducer } from "./Combin
 const reducers = combineReducers({
     getStaffs: getStaffsReducer,
     getCustomers: getCustomerReducer,
-    createStaff: createStaffReducer
+    createStaff: createStaffReducer,
+    updateAccount: updateAccountReducer,
+    getActivities :getActivitiesReducer,
+    addNewProductDiscount :addNewProductDiscountSliceReducer,
+    addNewGiftVoucher : addNewGiftVoucherSliceReducer,
+    addNewSaleVoucher : addNewSaleDiscountSliceReducer,
+    addNewExchangeVoucher : addNewExchangeVoucherReducer,
+    createBrand :createBrandReducer,
+    getBrand : getBrandReducer,
 })
 
 export {reducers}

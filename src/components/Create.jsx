@@ -1,11 +1,9 @@
 import { useSelector, useDispatch } from "react-redux";
 import { createStaffAction } from "../redux/Features/dashboard/staff/staffCreateSlice";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 const CreateStaffForm = () => {
   const dispatch = useDispatch();
-  const nav = useNavigate()
   const { isError, isLoading } = useSelector((state) => state.createStaff);
 
   const [payload, setPayload] = useState({
@@ -29,7 +27,6 @@ const CreateStaffForm = () => {
     try {
       await dispatch(createStaffAction(payload)); // Dispatch createStaffAction with payload
       console.log("data", payload);
-      nav("/dashboard/staff-list")
     } catch (error) {
       console.log(error);
     }
@@ -44,8 +41,9 @@ const CreateStaffForm = () => {
               <label>Display Name</label>
               <input type='text'
                 id="display_name"
-                value={payload.display_name}
+                value={values.display_name}
                 onChange={handleChange}
+                onBlur={handleBlur}
                 name="display_name"
                 placeholder='Type display name' className='bg-gray-300 py-2 px-2' />
             </div>
@@ -53,8 +51,9 @@ const CreateStaffForm = () => {
               <label>Password</label>
               <input type='password'
                 id="password"
-                value={payload.password}
+                value={values.password}
                 onChange={handleChange}
+                onBlur={handleBlur}
                 name="password"
 
 
@@ -64,8 +63,9 @@ const CreateStaffForm = () => {
               <label className='text-nowrap'>Staff Role</label>
               <select
                 id="staff_role"
-                value={payload.staff_role}
+                value={values.staff_role}
                 onChange={handleChange}
+                onBlur={handleBlur}
                 name="staff_role"
 
                 className='shadow bg-pink-200 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
@@ -84,16 +84,18 @@ const CreateStaffForm = () => {
               <label>Username</label>
               <input type='text'
                 id="username"
-                value={payload.username}
+                value={values.username}
                 onChange={handleChange}
+                onBlur={handleBlur}
                 name="username" placeholder='Type Username' className='bg-gray-300 py-2 px-2' />
             </div>
             <div className=' flex flex-col mt-8'>
               <label>Re-type Password</label>
               <input type='password'
                 id="retype_password"
-                value={payload.retype_password}
+                value={values.retype_password}
                 onChange={handleChange}
+                onBlur={handleBlur}
                 name="retype_password"
 
                 placeholder='Re-type password'

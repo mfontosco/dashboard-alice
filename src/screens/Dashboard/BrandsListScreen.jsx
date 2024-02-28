@@ -1,12 +1,22 @@
-import React from 'react';
+import  {useEffect} from 'react';
 import BrandTable from '../../components/BrandTable';
 import { FaPlus } from "react-icons/fa6";
 import { TfiMenuAlt } from "react-icons/tfi";
 import { PiCoatHangerThin } from "react-icons/pi";
 import { useNavigate } from 'react-router-dom';
+import {useSelector,useDispatch} from  "react-redux"
+import {getBrandAction} from  "../../redux/Features/dashboard/brand/getBrandSlice"
 
 const BrandsListScreen = () => {
   const nav =useNavigate()
+  const dispatch = useDispatch()
+  const {isLoading,brand,isError} = useSelector((state)=>state.getBrand)
+
+  const brandArray = brand?.brands
+
+  useEffect(()=>{
+    dispatch(getBrandAction())
+  },[dispatch])
   return (
     <div className='w-full '>
      <div className=' flex  justify-center bg-white mb-4 gap-4 w-64  border mx-auto'>
@@ -22,7 +32,7 @@ const BrandsListScreen = () => {
      </div>
      <div className='w-full mx-auto  md:w-[80%]  mb-4 flex flex-col rounded-md bg-white pt-6'>
      <h2 className='text-center  text-lg mb-4'>Brands</h2>
-      <BrandTable/>
+      <BrandTable brand={brandArray} isError={isError} isLoading={isLoading}/>
      </div>
     </div>
   );

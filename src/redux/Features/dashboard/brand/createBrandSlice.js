@@ -1,10 +1,10 @@
 import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
-import staffService from "./staffService";
+import brandServices from "./brandServices";
 
  console.log("-----------------")
 
 const initialState ={
-    staff:[],
+    brand:[],
     isError:false,
     isSuccess:false,
     isLoading:false,
@@ -13,10 +13,10 @@ const initialState ={
 console.log("----------------->>>>>>.>>>>>>>>")
 
 
-export const createStaffAction = createAsyncThunk("api/Staff_list",async(staffData,thunkAPI)=>{
+export const createBrandAction = createAsyncThunk("api/Staff_list",async(brandData,thunkAPI)=>{
     console.log("--------********--------->>>>>>.>>>>>>>>")
     try {
-        return await staffService.createStaff(staffData)
+        return await brandServices.createBrand(brandData)
     } catch (error) {
         const message =
         (error.response &&
@@ -30,8 +30,8 @@ export const createStaffAction = createAsyncThunk("api/Staff_list",async(staffDa
     }
 })
 
-export const createStaffSlice = createSlice({
-    name:"staff",
+export const createBrandSlice = createSlice({
+    name:"brand",
     initialState,
     reducers:{
         reset:(state)=>{
@@ -42,24 +42,24 @@ export const createStaffSlice = createSlice({
         }
     },
     extraReducers:(builder)=>{
-builder.addCase(createStaffAction.pending,(state)=>{
+builder.addCase(createBrandAction.pending,(state)=>{
     state.isLoading =true
 })
-builder.addCase(createStaffAction.fulfilled,(state,action)=>{
-    state.isLoading=false,
-    state.isSuccess=true,
-    state.staff=action.payload
+builder.addCase(createBrandAction.fulfilled,(state,action)=>{
+    state.isLoading = false,
+    state.isSuccess = true,
+    state.brand = action.payload
 })
-builder.addCase(createStaffAction.rejected,(state,action)=>{
-    state.isLoading=false, 
-    state.isSuccess=false,
-    state.isError=true,
-    state.message=action.payload
+builder.addCase(createBrandAction.rejected,(state,action)=>{
+    state.isLoading = false, 
+    state.isSuccess = false,
+    state.isError = true,
+    state.message = action.payload
 
 })
     }
 })
 
-export const {reset}=createStaffSlice.actions;
+export const {reset}=createBrandSlice.actions;
 
-export default createStaffSlice.reducer
+export default createBrandSlice.reducer

@@ -1,10 +1,10 @@
 import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
-import staffService from "./staffService";
+import voucherServices from "./voucherServices";
 
  console.log("-----------------")
 
 const initialState ={
-    staff:[],
+    voucher:[],
     isError:false,
     isSuccess:false,
     isLoading:false,
@@ -13,10 +13,10 @@ const initialState ={
 console.log("----------------->>>>>>.>>>>>>>>")
 
 
-export const createStaffAction = createAsyncThunk("api/Staff_list",async(staffData,thunkAPI)=>{
+export const addNewSaleVoucherAction = createAsyncThunk("api/Staff_list",async(staffData,thunkAPI)=>{
     console.log("--------********--------->>>>>>.>>>>>>>>")
     try {
-        return await staffService.createStaff(staffData)
+        return await voucherServices.addNewSaleVoucher(staffData)
     } catch (error) {
         const message =
         (error.response &&
@@ -30,7 +30,7 @@ export const createStaffAction = createAsyncThunk("api/Staff_list",async(staffDa
     }
 })
 
-export const createStaffSlice = createSlice({
+export const addNewSaleVoucherSlice = createSlice({
     name:"staff",
     initialState,
     reducers:{
@@ -42,15 +42,15 @@ export const createStaffSlice = createSlice({
         }
     },
     extraReducers:(builder)=>{
-builder.addCase(createStaffAction.pending,(state)=>{
+builder.addCase(addNewSaleVoucherAction.pending,(state)=>{
     state.isLoading =true
 })
-builder.addCase(createStaffAction.fulfilled,(state,action)=>{
+builder.addCase(addNewSaleVoucherAction.fulfilled,(state,action)=>{
     state.isLoading=false,
     state.isSuccess=true,
     state.staff=action.payload
 })
-builder.addCase(createStaffAction.rejected,(state,action)=>{
+builder.addCase(addNewSaleVoucherAction.rejected,(state,action)=>{
     state.isLoading=false, 
     state.isSuccess=false,
     state.isError=true,
@@ -60,6 +60,6 @@ builder.addCase(createStaffAction.rejected,(state,action)=>{
     }
 })
 
-export const {reset}=createStaffSlice.actions;
+export const {reset}=addNewSaleVoucherSlice.actions;
 
-export default createStaffSlice.reducer
+export default addNewSaleVoucherSlice.reducer

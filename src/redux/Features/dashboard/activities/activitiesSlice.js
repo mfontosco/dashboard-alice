@@ -1,22 +1,21 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import staffServices from "./staffService";
+import activitiesServices from "./activitiesServices";
 
-console.log("=========>",staffServices);
 
 const initialState = {
-    staffs: null,
+    activities: null,
     isError: false,
     isSuccess: false,
     isLoading: false,
     message: ""
 };
 
-export const getStaffAction = createAsyncThunk(
-    "api/Staff_list/",
+export const getActivitiesAction = createAsyncThunk(
+    "api/activities/",
     async (_, thunkAPI) => {
         try {
             // Corrected: Await the async function call
-            return await staffServices.getAllStaffs();
+            return await activitiesServices.getAllActivities();
         } catch (error) {
             const message =
                 (error.response &&
@@ -31,8 +30,8 @@ export const getStaffAction = createAsyncThunk(
     }
 );
 
-export const getStaffSlice = createSlice({
-    name: "staffs",
+export const getActivitiesSlice = createSlice({
+    name: "activity",
     initialState,
     reducers: {
         reset: (state) => {
@@ -43,16 +42,16 @@ export const getStaffSlice = createSlice({
         }
     },
     extraReducers: (builder) => {
-        builder.addCase(getStaffAction.pending, (state) => {
+        builder.addCase (getActivitiesAction.pending, (state) => {
             state.isLoading = true;
         });
-        builder.addCase(getStaffAction.fulfilled, (state, action) => {
+        builder.addCase (getActivitiesAction.fulfilled, (state, action) => {
             state.isLoading = false;
             state.isSuccess = true;
             // Corrected: Set state.staffs instead of state.Staff
-            state.staffs = action.payload;
+            state.activities = action.payload;
         });
-        builder.addCase(getStaffAction.rejected, (state, action) => {
+        builder.addCase(getActivitiesAction.rejected, (state, action) => {
             state.isLoading = false;
             state.isSuccess = false;
             state.isError = true;
@@ -61,6 +60,6 @@ export const getStaffSlice = createSlice({
     }
 });
 
-export const { reset } = getStaffSlice.actions;
+export const { reset } = getActivitiesSlice.actions;
 
-export default getStaffSlice.reducer;
+export default getActivitiesSlice.reducer;

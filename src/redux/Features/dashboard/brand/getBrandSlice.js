@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import staffServices from "./staffService";
+import brandServices from './brandServices';
 
-console.log("=========>",staffServices);
+console.log("=========>",brandServices);
 
 const initialState = {
     staffs: null,
@@ -11,12 +11,12 @@ const initialState = {
     message: ""
 };
 
-export const getStaffAction = createAsyncThunk(
+export const getBrandAction = createAsyncThunk(
     "api/Staff_list/",
     async (_, thunkAPI) => {
         try {
             // Corrected: Await the async function call
-            return await staffServices.getAllStaffs();
+            return await brandServices.getAllBrands();
         } catch (error) {
             const message =
                 (error.response &&
@@ -31,7 +31,7 @@ export const getStaffAction = createAsyncThunk(
     }
 );
 
-export const getStaffSlice = createSlice({
+export const getBrandSlice = createSlice({
     name: "staffs",
     initialState,
     reducers: {
@@ -43,16 +43,16 @@ export const getStaffSlice = createSlice({
         }
     },
     extraReducers: (builder) => {
-        builder.addCase(getStaffAction.pending, (state) => {
+        builder.addCase(getBrandAction.pending, (state) => {
             state.isLoading = true;
         });
-        builder.addCase(getStaffAction.fulfilled, (state, action) => {
+        builder.addCase(getBrandAction.fulfilled, (state, action) => {
             state.isLoading = false;
             state.isSuccess = true;
             // Corrected: Set state.staffs instead of state.Staff
-            state.staffs = action.payload;
+            state.brand = action.payload;
         });
-        builder.addCase(getStaffAction.rejected, (state, action) => {
+        builder.addCase(getBrandAction.rejected, (state, action) => {
             state.isLoading = false;
             state.isSuccess = false;
             state.isError = true;
@@ -61,6 +61,6 @@ export const getStaffSlice = createSlice({
     }
 });
 
-export const { reset } = getStaffSlice.actions;
+export const { reset } = getBrandSlice.actions;
 
-export default getStaffSlice.reducer;
+export default getBrandSlice.reducer;

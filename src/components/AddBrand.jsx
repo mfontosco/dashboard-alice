@@ -1,42 +1,32 @@
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import z from 'zod';
-
-const schema = z.object({
-  name: z.string().regex(/^[A-Za-z]+$/).min(1, { message: 'Name is required' }),
-}).required();
+import {useState} from "react"
 
 const AddBrand = () => {
-  const {
-    register,
-    handleSubmit,
-    setError,
-    formState: { errors, isSubmitting },
-  } = useForm({
-    // resolver: zodResolver(schema),
-  });
-
-  const submitHandler = async (data) => {
+  const [payload,setPayload] = useState({
+    name:""
+  })
+  const changeHandler =(e)=>{
+    const {name,value} = e.target
+    setPayload({...payload, [name]: value})
+  } 
+  const submitHandler = async () => {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      console.log(data);
+     alert("====>")
     } catch (error) {
-      setError('root', {
-        message: 'An unexpected error occurred',
-      });
+     console.log("error", error)
     }
   };
 
   return (
     <div className=''>
-      <form className='w-full' onSubmit={handleSubmit(submitHandler)}>
+      <form className='w-full' onSubmit={submitHandler}>
         <div className='flex flex-col  w-full px-8 gap-4'>
           <div className='w-full flex flex-col'>
             <label>Brand Name</label>
             <input
-              {...register('name')}
+              
               id='name'
               type='text'
+              onChange={changeHandler}
               placeholder='Type category name'
               className='bg-gray-300 py-2 px-2'
             />

@@ -1,9 +1,14 @@
 
 import { IoMdFunnel } from 'react-icons/io';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const StaffTable = ({ staffs ,isLoading,isError,message,isSuccess}) => {
-  console.log("staffs88888",staffs)
+  const nav = useNavigate()
+  console.log("staffs============>",staffs)
   const staffsArray = staffs?.staffs;
+  const navigate  =(data)=>{
+    return nav("/dashboard/staff",{state:data})
+  }
   return (
     <div className="overflow-x-auto">
       <table className="min-w-full bg-white">
@@ -32,8 +37,8 @@ const StaffTable = ({ staffs ,isLoading,isError,message,isSuccess}) => {
             </tr>
           )}
           { staffsArray?.map((staff) => (
-            <tr key={staff.id}>
-              <td className="text-left text-sm py-3 px-4">{staff?.full_name}</td>
+            <tr className='cursor-pointer' key={staff.id} onClick={()=>navigate(staff)}>
+              <td className="text-left text-sm py-3 px-4">{staff?.display_name}</td>
               <td className="text-left text-sm py-3 px-4">{staff?.username}</td>
               <td className="text-left text-sm py-3 px-4">{staff?.role}</td>
             </tr>

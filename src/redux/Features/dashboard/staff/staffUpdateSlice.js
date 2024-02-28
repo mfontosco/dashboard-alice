@@ -13,10 +13,11 @@ const initialState ={
 console.log("----------------->>>>>>.>>>>>>>>")
 
 
-export const createStaffAction = createAsyncThunk("api/Staff_list",async(staffData,thunkAPI)=>{
+export const updateStaffAction = createAsyncThunk("api/Staff_list",async(staffData,thunkAPI)=>{
     console.log("--------********--------->>>>>>.>>>>>>>>")
     try {
-        return await staffService.createStaff(staffData)
+        return await staffService.updateStaff(staffData)
+
     } catch (error) {
         const message =
         (error.response &&
@@ -24,13 +25,14 @@ export const createStaffAction = createAsyncThunk("api/Staff_list",async(staffDa
           error.response.data.message) ||
         error.message ||
         error.toString();
-    console.log(message)
+
+      console.log(message)
     //   toast.warning(`${message}`);
       return thunkAPI.rejectWithValue(message);
     }
 })
 
-export const createStaffSlice = createSlice({
+export const updateStaffSlice = createSlice({
     name:"staff",
     initialState,
     reducers:{
@@ -42,15 +44,15 @@ export const createStaffSlice = createSlice({
         }
     },
     extraReducers:(builder)=>{
-builder.addCase(createStaffAction.pending,(state)=>{
+    builder.addCase(updateStaffAction.pending,(state)=>{
     state.isLoading =true
 })
-builder.addCase(createStaffAction.fulfilled,(state,action)=>{
+builder.addCase(updateStaffAction.fulfilled,(state,action)=>{
     state.isLoading=false,
     state.isSuccess=true,
     state.staff=action.payload
 })
-builder.addCase(createStaffAction.rejected,(state,action)=>{
+builder.addCase(updateStaffAction.rejected,(state,action)=>{
     state.isLoading=false, 
     state.isSuccess=false,
     state.isError=true,
@@ -60,6 +62,6 @@ builder.addCase(createStaffAction.rejected,(state,action)=>{
     }
 })
 
-export const {reset}=createStaffSlice.actions;
+export const {reset} = updateStaffSlice.actions;
 
-export default createStaffSlice.reducer
+export default updateStaffSlice.reducer

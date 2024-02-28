@@ -2,41 +2,34 @@ import axios from "axios";
 
 const baseUrl ="http://184.94.212.5/"
 
-const token ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzEzMjY4Nzc5LCJpYXQiOjE3MDg5NDg3NzksImp0aSI6ImY1M2MwZTg3ZDA4NzRhZDg4MDhhNGMyZGRiNTNlMWNhIiwidXNlcl9pZCI6MSwiZnVsbF9uYW1lIjoiUGF0cmljayBmcmFuY2lzIiwidXNlcm5hbWUiOiJpcmVzIiwiZW1haWwiOiJmcmFuY2lzZGFuaWVsMTQwQGdtYWlsLmNvbSIsImJpbyI6ImFtIGEgZnVsbHN0YWNrIHNvZnR3YXJlIGVuZyIsImltYWdlIjoiZGVmYXVsdC5qcGciLCJ2ZXJpZmllZCI6ZmFsc2V9.GwgUzXcTybSKwcebUAE8aDfg_99xIUmDEwQBiUmktoE"
+const token ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzEyODU0MzAxLCJpYXQiOjE3MDg1MzQzMDEsImp0aSI6ImMzYWRjMWFiMDE3MzQ2MzNhYzliYmFjMTMzY2YxZGFmIiwidXNlcl9pZCI6MSwiZnVsbF9uYW1lIjoiUGF0cmljayBmcmFuY2lzIiwidXNlcm5hbWUiOiJpcmVzIiwiZW1haWwiOiJmcmFuY2lzZGFuaWVsMTQwQGdtYWlsLmNvbSIsImJpbyI6ImFtIGEgZnVsbHN0YWNrIHNvZnR3YXJlIGVuZyIsImltYWdlIjoiZGVmYXVsdC5qcGciLCJ2ZXJpZmllZCI6ZmFsc2V9.OEZOjPbyYOvqmclsb4KYBYJAfs698JYDXc52VexuEL8"
+// const createClass = async(classData)=>{
+//     const config = {
+//         header:{
+//             "content-type":"application/json"
+//             "authorization":`Bearer ${token}`
+//         },
+//         Credential:"include",
+//         mode:"cors"
+//     }
 
-const createStaff = async(staffData)=>{
-    console.log("staffData", staffData)
-    console.log("it's working")
-   try {
+//     const {data} = await axios.post(`${baseUrl}/classes`,classData,config)
+//     console.log(data)
+//     return data
+// }
+const getAllAccounts = async () => {
+    console.log("getcustomers" + "its working");
     const config = {
         headers: {
             "content-type": "application/json",
             "authorization": `Bearer ${token}`
         },
-    credentials: "include",
-        mode: "cors"
-    };
-
-    const {data} = await axios.post(`${baseUrl}api/Staff_list/`,staffData,config)
-    console.log(data)
-    return data
-   } catch (error) {
-    console.log(error)
-   }
-}
-const getAllStaffs = async () => {
-    console.log("getclasses" + "its working");
-    const config = {
-        headers: {
-            "content-type": "application/json",
-            "authorization": `Bearer ${token}`
-        },
-    credentials: "include",
+        credentials: "include",
         mode: "cors"
     };
 
     try {
-        const response = await axios.get(`${baseUrl}api/Staff_list/`, config);
+        const response = await axios.get(`${baseUrl}api/customers/`, config);
         console.log("staff-data", response.data);
         return response.data;
     } catch (error) {
@@ -65,18 +58,18 @@ const getAllStaffs = async () => {
 //     return data
 // }
 
-const updateStaff = async(id,staffData)=>{
+const updateAccount = async(id,accountData)=>{
 
     const config = {
         headers:{
             "content-type":"application/json",
-            // authorization:`Bearer ${token}`
+            authorization:`Bearer ${token}`
         },
-        Credential:"include",
+        credentials:"include",
         mode:"cors"
     }
     console.log("it is working")
-    const {data} = await axios.put(`${baseUrl}/staff_Account/${id}`,staffData,config)
+    const {data} = await axios.post(`${baseUrl}/Account_update/`,accountData,config)
     console.log(data)
     return data
 }
@@ -96,11 +89,11 @@ const updateStaff = async(id,staffData)=>{
 //     return data
 // }
 
-const staffServices = {
-    getAllStaffs,
-    createStaff,
-    updateStaff,
+const accountServices ={
+    getAllAccounts,
+    updateAccount
+   
 
 }
 
-export default staffServices
+export default accountServices

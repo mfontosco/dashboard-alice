@@ -1,7 +1,7 @@
 import React from 'react';
 import { IoMdFunnel } from 'react-icons/io';
 
-const BrandTable= () => {
+const BrandTable= ({brand}) => {
   return (
     <div className="overflow-x-auto">
       <table className="min-w-full bg-white">
